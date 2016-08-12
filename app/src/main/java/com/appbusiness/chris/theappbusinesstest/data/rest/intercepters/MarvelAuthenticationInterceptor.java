@@ -1,6 +1,10 @@
 package com.appbusiness.chris.theappbusinesstest.data.rest.intercepters;
 
+import com.appbusiness.chris.theappbusinesstest.BuildConfig;
+import com.appbusiness.chris.theappbusinesstest.classes.UtilString;
+
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
@@ -18,8 +22,22 @@ public class MarvelAuthenticationInterceptor implements Interceptor {
 		Request original = chain.request();
 		HttpUrl originalHttpUrl = original.url();
 
+		final Long timeStamp = System.currentTimeMillis();
+
+		String unHashedString = timeStamp + BuildConfig.MARVEL_PRIVATE_KEY + BuildConfig.MARVEL_PUBLIC_KEY;
+		String hash = null;
+
+		try {
+			hash = UtilString.md5Hash(unHashedString);
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+			// If null hash is added, it will result in a 409 error, which can be dealt with higher up
+		}
+
 		HttpUrl url = originalHttpUrl.newBuilder()
-				.addQueryParameter("apikey", "your-actual-api-key")
+				.addQueryParameter("apikey", BuildConfig.MARVEL_PUBLIC_KEY)
+				.addQueryParameter("ts", timeStamp.toString())
+				.addQueryParameter("hash", hash)
 				.build();
 
 		// Request customization: add request headers
@@ -28,19 +46,5 @@ public class MarvelAuthenticationInterceptor implements Interceptor {
 
 		Request request = requestBuilder.build();
 		return chain.proceed(request);
-	}
-
-	public String MD5(String md5) {
-		try {
-			java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
-			byte[] array = md.digest(md5.getBytes());
-			StringBuffer sb = new StringBuffer();
-			for (int i = 0; i < array.length; ++i) {
-				sb.append(Integer.toHexString((array[i] & 0xFF) | 0x100).substring(1,3));
-			}
-			return sb.toString();
-		} catch (java.security.NoSuchAlgorithmException e) {
-		}
-		return null;
 	}
 }
