@@ -10,8 +10,8 @@ import rx.subscriptions.CompositeSubscription;
 
 public class  BasePresenter<T extends MvpView> implements Presenter<T> {
 
-	private T mView;
-	private CompositeSubscription mSubscription;
+	protected T mView;
+	protected CompositeSubscription mSubscription;
 
 	public BasePresenter() {
 		mSubscription = new CompositeSubscription();

@@ -1,19 +1,18 @@
 package com.appbusiness.chris.theappbusinesstest.data;
 
-import android.util.Log;
-
 import com.appbusiness.chris.theappbusinesstest.data.rest.MarvelService;
 
+import com.appbusiness.chris.theappbusinesstest.data.rest.UtilApi;
+import com.appbusiness.chris.theappbusinesstest.domain.entitys.Comic;
 import com.appbusiness.chris.theappbusinesstest.domain.entitys.ComicDataWrapper;
-import com.appbusiness.chris.theappbusinesstest.ui.comic.comicdetail.ComicDetailView;
-import com.appbusiness.chris.theappbusinesstest.ui.comic.models.ComicModel;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.NoSuchElementException;
 
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import rx.Observable;
+import rx.functions.Func1;
 
 
 /**
@@ -22,33 +21,42 @@ import rx.schedulers.Schedulers;
 public class ComicManager {
 
 	private final MarvelService mMarvelService;
-	private List<ComicModel> mComicModels = new ArrayList<>();
+	private List<Comic> mComicModels = new ArrayList<>();
 
 	public ComicManager(MarvelService marvelService) {
 		mMarvelService = marvelService;
 	}
 
 
-	public void getCurrentAndFreshComics() {// cache conact local fresh
-		mMarvelService.getComics()
-				.subscribeOn(Schedulers.io())
-				.observeOn(AndroidSchedulers.mainThread())
-				.subscribe(new Subscriber<ComicDataWrapper>() {
-			@Override
-			public void onCompleted() {
-				Log.i("Test", "complete");
-			}
+	public Observable<List<Comic>> getCurrentAndFreshComics() {
+		return Observable.concat(getComicsFromMemory(), getFreshComics()).cache();
+	}
 
-			@Override
-			public void onError(Throwable e) {
-				e.printStackTrace();
-				Log.i("Test", "error");
-			}
+	public Observable<List<Comic>> getComicsFromMemory() {
+		return Observable.just(mComicModels);
+	}
 
-			@Override
-			public void onNext(ComicDataWrapper s) {
-				Log.i("Test", "next " + s.getData().getComics().get(1).getTitle());
-			}
-		});
+	public Observable<List<Comic>> getFreshComics() {
+		return mMarvelService.getComics()
+				.compose(UtilApi.applySchedulersAndCheckForError())
+				.map((Func1<ComicDataWrapper, List<Comic>>) comicDataWrapper -> {
+					if (comicDataWrapper.getData() != null) {
+						return comicDataWrapper.getData().getComics();
+					}
+					return Collections.emptyList();
+				})
+				.doOnNext(comics -> mComicModels = comics);
+	}
+
+	public Observable<Comic> getComicFomMemory(Integer comicId) {
+		return getComicsFromMemory()
+				.map(comics -> {
+					for (Comic comic : comics) {
+						if (comic.getId().equals(comicId)) {
+							return comic;
+						}
+					}
+					throw new NoSuchElementException("No comic with id" + comicId + " is in memory");
+				}).cache();
 	}
 }

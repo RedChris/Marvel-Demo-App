@@ -9,10 +9,10 @@ import com.google.gson.annotations.SerializedName;
 public class CreatorSummary {
 
 	@SerializedName("name")
-	public String name;
+	private String name;
 
 	@SerializedName("role")
-	public String role;
+	private String role;
 
 	public String getName() {
 		return name;

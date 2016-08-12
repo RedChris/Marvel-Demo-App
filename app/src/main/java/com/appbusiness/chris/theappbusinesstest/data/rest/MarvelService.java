@@ -24,14 +24,15 @@ public interface MarvelService {
 
 	String ENDPOINT = "http://gateway.marvel.com/";
 
-	@GET("v1/public/comics")
+	@GET("v1/public/comics?limit=100")
 	Observable<ComicDataWrapper> getComics();
 
-	/******** Factory class that sets up a new Marvel services *******/
+	/******** Factory class that sets up a new Marvel service *******/
 	class Factory {
 
 		public static MarvelService makeMarvelService() {
 
+			RxCallAdapterErrorHandler errorHandler = new RxCallAdapterErrorHandler();
 
 			Gson gson = new GsonBuilder().create();
 
@@ -48,8 +49,9 @@ public interface MarvelService {
 					.baseUrl(MarvelService.ENDPOINT)
 					.client(okHttpClient)
 					.addConverterFactory(GsonConverterFactory.create(gson))
-					.addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+					.addCallAdapterFactory(RxApiErrorHandlingCallAdapterFactory.create(errorHandler))
 					.build();
+
 			return retrofit.create(MarvelService.class);
 		}
 

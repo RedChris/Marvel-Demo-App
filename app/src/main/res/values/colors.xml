@@ -3,4 +3,11 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <!-- App Palette -->
+    <color name="layout_background_light_grey">#DDDDDD</color>
+    <color name="black35PercentColor">#59000000</color>
+
+    <!-- Extra -->
+    <color name="transparent">#00000000</color>
 </resources>

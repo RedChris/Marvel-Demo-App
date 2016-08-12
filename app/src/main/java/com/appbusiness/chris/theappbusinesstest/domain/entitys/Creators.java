@@ -11,9 +11,9 @@ import java.util.List;
 public class Creators {
 
 	@SerializedName("items")
-	public List<CreatorSummary> items = new ArrayList<>();
+	public List<CreatorSummary> mCreatorSummaries = new ArrayList<>();
 
-	public List<CreatorSummary> getItems() {
-		return items;
+	public List<CreatorSummary> getCreatorSummaries() {
+		return mCreatorSummaries;
 	}
 }

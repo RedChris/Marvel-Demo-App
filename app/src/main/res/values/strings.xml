@@ -1,3 +1,33 @@
 <resources>
     <string name="app_name">The App Business Test</string>
+    <string name="dialog_action_ok">OK</string>
+
+    <!-- Comic List -->
+    <string name="comic_list_title">Comics</string>
+    <string name="comic_list_empty_view">There are no comics, \n please try again later :(</string>
+    <string name="comic_list_retry">RETRY</string>
+    <string name="comics_list_loading_comics_now">Loading comics now</string>
+    <string name="comic_list_error_title">We can\'t get any comics</string>
+    <string name="comic_list_error_message">We can\'t seem to get any comics right now. Please try again later </string>
+    <string name="comic_list_item_issue">Issue \n #%s </string>
+
+    <!-- Comic Detail -->
+    <string name="comic_detail_no_id_error_title">Oops, something went wrong</string>
+    <string name="comic_detail_no_id_error_message">Please try again</string>
+    <string name="comics_detail_loading_comic_now">Loading comic now</string>
+    <string name="comic_detail_loading">loading</string>
+    <string name="comic_detail_number_of_pages">Number of Pages</string>
+    <string name="comic_detail_price">Price</string>
+
+    <string name="comic_detail_error_title">We can\'t get your comic</string>
+    <string name="comic_detail_error_message">We can\'t seem to get your comic right now. Please try again later</string>
+
+
+    <!-- Errors -->
+    <string name="generic_error_title">Oops, Something went wrong</string>
+    <string name="generic_error_message">Please try again later</string>
+    <string name="generic_network_error_title">Check your internet connection</string>
+    <string name="generic_network_error_message">Where having trouble connecting to the internet</string>
+    <string name="comic_list_pages_in_total">%d pages in total</string>
+
 </resources>
