@@ -8,7 +8,6 @@ import com.appbusiness.chris.theappbusinesstest.ui.comic.models.ComicModel;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Currency;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -18,7 +17,6 @@ import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func2;
-import rx.schedulers.Schedulers;
 
 /**
  * Created by Chris on 12/08/2016.

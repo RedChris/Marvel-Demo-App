@@ -32,6 +32,8 @@
     <string name="comic_list_pages_in_total">%d pages in total</string>
     <string name="activity_purchase_how_much_can_you_afford_to_spend">How Much can you afford to spend</string>
     <string name="comic_purchase_title">Purchase Comics</string>
+    <string name="comic_purchase_default_budget">0.00</string>
+    <string name="comic_purchase_you_can_buy_x_comics">You can buy up to %d comics</string>
 
 
 </resources>

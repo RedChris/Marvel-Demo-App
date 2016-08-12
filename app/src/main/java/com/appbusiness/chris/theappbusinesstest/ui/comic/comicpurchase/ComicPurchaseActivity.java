@@ -58,7 +58,7 @@ public class ComicPurchaseActivity extends AppCompatActivity implements ComicPur
 
 	@Override
 	public void setAmount(Integer amountOfComicsThatCanBeBrought) {
-		mAmount.setText("You can buy up to " + amountOfComicsThatCanBeBrought + " comics");
+		mAmount.setText(String.format(getString(R.string.comic_purchase_you_can_buy_x_comics), amountOfComicsThatCanBeBrought));
 	}
 
 	@Override
