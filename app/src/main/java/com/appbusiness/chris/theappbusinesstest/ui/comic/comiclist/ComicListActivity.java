@@ -16,6 +16,7 @@ import com.appbusiness.chris.theappbusinesstest.classes.StringResHolder;
 import com.appbusiness.chris.theappbusinesstest.classes.UtilDialog;
 import com.appbusiness.chris.theappbusinesstest.ui.comic.comicdetail.ComicDetailActivity;
 import com.appbusiness.chris.theappbusinesstest.ui.comic.comiclist.adapter.ComicListAdapter;
+import com.appbusiness.chris.theappbusinesstest.ui.comic.comicpurchase.ComicPurchaseActivity;
 import com.appbusiness.chris.theappbusinesstest.ui.comic.models.ComicModel;
 
 import java.util.List;
@@ -38,6 +39,7 @@ public class ComicListActivity extends AppCompatActivity implements ComicListVie
 	@BindView(R.id.empty_view) TextView mEmptyView;
 	@BindView(R.id.retry_button) Button mRetryButton;
 	@BindView(R.id.total_pages) TextView mTotalPages;
+	@BindView(R.id.purchase_comic) Button mPurchaseButton;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +61,7 @@ public class ComicListActivity extends AppCompatActivity implements ComicListVie
 		mAdapter = new ComicListAdapter(this);
 
 		mRetryButton.setOnClickListener(view -> mComicListPresenter.userWantsToReloadComics());
+		mPurchaseButton.setOnClickListener(view -> mComicListPresenter.userWantsToGoToPurchaseComicPage());
 
 		setupListView();
 	}
@@ -133,5 +136,10 @@ public class ComicListActivity extends AppCompatActivity implements ComicListVie
 	@Override
 	public void setTotalNumberOfPages(int totalPageCount) {
 		mTotalPages.setText(String.format(getString(R.string.comic_list_pages_in_total), totalPageCount));
+	}
+
+	@Override
+	public void goToPurchasePage() {
+		startActivity(new Intent(this, ComicPurchaseActivity.class));
 	}
 }

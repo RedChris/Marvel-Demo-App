@@ -42,19 +42,16 @@ public class ComicListPresenter extends BasePresenter<ComicListView> {
 					}
 					return comicModelList;
 				})
-				.doOnNext(new Action1<List<ComicModel>>() {
-					@Override
-					public void call(List<ComicModel> comicModels) {
-						if (comicModels != null && !comicModels.isEmpty()) {
-							int totalPageCount = 0;
-							for (ComicModel comicModel : comicModels) {
-								Integer numberOfPages = comicModel.getPageCount();
-								if (numberOfPages != null) {
-									totalPageCount += numberOfPages;
-								}
+				.doOnNext(comicModels -> {
+					if (comicModels != null && !comicModels.isEmpty()) {
+						int totalPageCount = 0;
+						for (ComicModel comicModel : comicModels) {
+							Integer numberOfPages = comicModel.getPageCount();
+							if (numberOfPages != null) {
+								totalPageCount += numberOfPages;
 							}
-							mView.setTotalNumberOfPages(totalPageCount);
 						}
+						mView.setTotalNumberOfPages(totalPageCount);
 					}
 				})
 				.subscribe(new MarvelApiSubscriber<List<ComicModel>>() {
@@ -102,5 +99,9 @@ public class ComicListPresenter extends BasePresenter<ComicListView> {
 	public void detachView() {
 		super.detachView();
 		getSubscription().unsubscribe();
+	}
+
+	public void userWantsToGoToPurchaseComicPage() {
+		mView.goToPurchasePage();
 	}
 }

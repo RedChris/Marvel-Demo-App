@@ -29,7 +29,10 @@ public class ComicManager {
 
 
 	public Observable<List<Comic>> getCurrentAndFreshComics() {
-		return Observable.concat(getComicsFromMemory(), getFreshComics()).cache();
+		Observable<List<Comic>> localMemoryComicObservable = getComicsFromMemory()
+				.filter(comics -> comics != null && !comics.isEmpty());
+
+		return Observable.concat(localMemoryComicObservable, getFreshComics()).cache();
 	}
 
 	public Observable<List<Comic>> getComicsFromMemory() {

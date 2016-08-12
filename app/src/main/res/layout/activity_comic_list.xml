@@ -25,6 +25,39 @@
         android:text="@string/comic_list_empty_view"/>
 
     <Button
+        android:id="@+id/purchase_comic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/buttonDivider"
+        android:padding="16dp"
+        android:background="@drawable/button_background_primary"
+        android:textColor="@android:color/white"
+        android:text="@string/comic_list_purchase_comics"
+        android:gravity="center"/>
+
+
+    <View
+        android:id="@+id/buttonDivider"
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:background="@color/black35PercentColor"
+        android:layout_alignTop="@+id/purchase_comic"
+        android:layout_alignParentBottom="true"/>
+
+    <TextView
+        android:id="@+id/total_pages"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/buttonDivider"
+        android:padding="16dp"
+        android:background="@drawable/button_background_primary"
+        android:textColor="@android:color/white"
+        android:gravity="center"/>
+
+    <Button
         android:id="@+id/retry_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -33,14 +66,4 @@
         android:layout_marginBottom="32dp"
         android:visibility="gone"
         android:text="@string/comic_list_retry"/>
-
-    <TextView
-        android:id="@+id/total_pages"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:padding="16dp"
-        android:background="@color/colorPrimary"
-        android:textColor="@android:color/white"
-        android:gravity="center"/>
 </RelativeLayout>

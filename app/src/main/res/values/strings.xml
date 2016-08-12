@@ -10,6 +10,7 @@
     <string name="comic_list_error_title">We can\'t get any comics</string>
     <string name="comic_list_error_message">We can\'t seem to get any comics right now. Please try again later </string>
     <string name="comic_list_item_issue">Issue \n #%s </string>
+    <string name="comic_list_purchase_comics">Purchase comics</string>
 
     <!-- Comic Detail -->
     <string name="comic_detail_no_id_error_title">Oops, something went wrong</string>
@@ -29,5 +30,8 @@
     <string name="generic_network_error_title">Check your internet connection</string>
     <string name="generic_network_error_message">Where having trouble connecting to the internet</string>
     <string name="comic_list_pages_in_total">%d pages in total</string>
+    <string name="activity_purchase_how_much_can_you_afford_to_spend">How Much can you afford to spend</string>
+    <string name="comic_purchase_title">Purchase Comics</string>
+
 
 </resources>

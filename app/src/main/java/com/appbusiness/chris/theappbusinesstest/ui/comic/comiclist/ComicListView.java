@@ -31,4 +31,6 @@ public interface ComicListView extends MvpView {
 	void hideEmptyView();
 
 	void setTotalNumberOfPages(int totalPageCount);
+
+	void goToPurchasePage();
 }
