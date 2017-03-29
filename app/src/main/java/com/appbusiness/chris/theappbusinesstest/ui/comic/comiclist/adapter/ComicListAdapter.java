@@ -54,7 +54,6 @@ public class ComicListAdapter extends RecyclerView.Adapter<ComicViewHolder> {
 			holder.mThumbnail.setImageDrawable(null);
 		}
 
-
 		holder.mTitle.setText(comicModel.getTitle());
 		holder.mIssueNumber.setText(String.format(mContext.getString(R.string.comic_list_item_issue), comicModel.getIssueNumber()));
 
@@ -80,7 +79,8 @@ public class ComicListAdapter extends RecyclerView.Adapter<ComicViewHolder> {
 			mComicItems = Collections.emptyList();
 		}
 
-		mComicItems = items;
+		mComicItems.clear();
+		mComicItems.addAll(items);
 		notifyDataSetChanged();
 	}
 

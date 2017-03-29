@@ -11,20 +11,24 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.comic.comiclist.ComicListActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
+
+
 
         <activity android:name=".ui.comic.comicdetail.ComicDetailActivity"
-                  android:parentActivityName=".ui.comic.comiclist.ComicListActivity"/>
+                  android:parentActivityName=".ui.comic.comiclist.ComicListActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.comic.comiclist.ComicListActivity"/>
+        </activity>
 
         <activity android:name=".ui.comic.comicpurchase.ComicPurchaseActivity"
                   android:parentActivityName=".ui.comic.comiclist.ComicListActivity"
-            android:windowSoftInputMode="stateVisible"/>
+            android:windowSoftInputMode="stateVisible">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.comic.comiclist.ComicListActivity"/>
+        </activity>
     </application>
 
 </manifest>

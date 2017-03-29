@@ -1,5 +1,7 @@
 package com.appbusiness.chris.theappbusinesstest.ui.comic.comicpurchase;
 
+import android.support.annotation.VisibleForTesting;
+
 import com.appbusiness.chris.theappbusinesstest.data.ComicManager;
 import com.appbusiness.chris.theappbusinesstest.domain.entitys.Comic;
 import com.appbusiness.chris.theappbusinesstest.ui.base.BasePresenter;
@@ -74,7 +76,8 @@ public class ComicPurchasePresenter extends BasePresenter<ComicPurchaseView> {
 		}));
 	}
 
-	private Observable<Double> budgetEntryObservable(ComicPurchaseView mvpView) {
+	@VisibleForTesting
+	protected Observable<Double> budgetEntryObservable(ComicPurchaseView mvpView) {
 		return mvpView.getBudgetEntryObservable()
 				.debounce(400, TimeUnit.MILLISECONDS)
 				.map(textViewTextChangeEvent -> textViewTextChangeEvent.text().toString())
@@ -107,7 +110,8 @@ public class ComicPurchasePresenter extends BasePresenter<ComicPurchaseView> {
 				.subscribeOn(AndroidSchedulers.mainThread());
 	}
 
-	private Observable<List<Double>> getSortedPriceAmounts() {
+	@VisibleForTesting
+	protected Observable<List<Double>> getSortedPriceAmounts() {
 		return mComicManager.getComicsFromMemory()
 				.map(comics -> {
 					List<ComicModel> models = new ArrayList<>();
